@@ -88,6 +88,8 @@ class data_input:
         def controlID(identity):
             if identity.isdigit() == False:
                 raise Exception("Enter only numeric characters.")
+            elif len(identity)!= 11:
+                raise Exception("Your ID number must consist of 11 digits.")
         while True:
             try: 
                 identity = input("Identity: ")
@@ -101,6 +103,8 @@ class data_input:
         def controlMail(Mail):
             if not re.search(".com", Mail):
                 raise Exception("Please enter a valid email address")
+            elif not re.search(".com",Mail):
+                raise Exception("Please enter a valid email address")
         while True:
             try:
                 Mail = input("Mail: ")
@@ -111,19 +115,18 @@ class data_input:
             else:
                 break
         
-        with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application","r",encoding= "utf-8") as file:
+        with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application/information.txt","r",encoding= "utf-8") as file:
             numberLines = file.readlines()
         if len(numberLines) == 0:
             Id = 1
         else:
-            with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application","r", encoding= "utf-8") as file:
+            with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application/information.txt","r", encoding= "utf-8") as file:
                 Id = int(file.readlines()[-1].split("-")[0])+1
                 
-        with open("C:/Users/ekvk4/Downloads/Information.txt","a+") as file:
+        with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application/information.txt","a+", encoding= "utf-8") as file:
             file.write("{} {} {} {} {} {}\n".format(Id,name,surname,age,identity,Mail))
             print("The data has been processed.") 
         self.back_menu()
-
 
     def data_del(self):
         pass
