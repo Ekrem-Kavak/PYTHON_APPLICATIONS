@@ -43,7 +43,7 @@ class data_input:
                 time.sleep(3)
             else:
                 break
-            return select
+        return select
 
     def data_add(self):
         def controlName(name):
@@ -64,7 +64,7 @@ class data_input:
                 raise Exception("Entry only alphabetic characters.")
         while True:
             try:
-                name = input("Surname: ")
+                surname = input("Surname: ")
                 controlSurname(surname)
             except Exception as exc_surname:
                 print(exc_surname)
@@ -77,7 +77,7 @@ class data_input:
                 raise Exception("Enter only numeric characters.")
         while True:
             try:
-                name = input("Age: ")
+                age = input("Age: ")
                 controlAge(age)
             except Exception as exc_age:
                 print(exc_age)
@@ -86,7 +86,7 @@ class data_input:
                 break
         
         def controlID(identity):
-            if identity.digit() == False:
+            if identity.isdigit() == False:
                 raise Exception("Enter only numeric characters.")
         while True:
             try: 
@@ -97,13 +97,13 @@ class data_input:
                 time.sleep(3)
             else:
                 break
-
+         
         def controlMail(Mail):
-            if not re.search("@" and ".com",Mail):
-                raise Exception("PLease enter a valid email address")
+            if not re.search(".com", Mail):
+                raise Exception("Please enter a valid email address")
         while True:
             try:
-                Mail = input("Mail")
+                Mail = input("Mail: ")
                 controlMail(Mail)
             except Exception as exc_Mail:
                 print(exc_Mail)
@@ -111,6 +111,19 @@ class data_input:
             else:
                 break
         
+        with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application","r",encoding= "utf-8") as file:
+            numberLines = file.readlines()
+        if len(numberLines) == 0:
+            Id = 1
+        else:
+            with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application","r", encoding= "utf-8") as file:
+                Id = int(file.readlines()[-1].split("-")[0])+1
+                
+        with open("C:/Users/ekvk4/Downloads/Information.txt","a+") as file:
+            file.write("{} {} {} {} {} {}\n".format(Id,name,surname,age,identity,Mail))
+            print("The data has been processed.") 
+        self.back_menu()
+
 
     def data_del(self):
         pass
