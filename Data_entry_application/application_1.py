@@ -121,7 +121,7 @@ class data_input:
             Id = 1
         else:
             with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application/information.txt","r", encoding= "utf-8") as file:
-                Id = int(file.readlines()[-1].split("-")[0])+1
+                Id = int(file.readlines()[-1].strip().split(" ")[0]) + 1 
                 
         with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application/information.txt","a+", encoding= "utf-8") as file:
             file.write("{} {} {} {} {} {}\n".format(Id,name,surname,age,identity,Mail))
@@ -129,18 +129,36 @@ class data_input:
         self.back_menu()
 
     def data_del(self):
-        pass
+        delete_person = input("Please enter he ID number of the person you want to delete: ")
+        with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application/information.txt","r",encoding= "utf-8") as file:
+            empty_list = []
+            new_list = file.readlines()
+            for i in range(0,len(new_list)):
+                empty_list.append(new_list[i].split("-")[0])
+
+        del new_list[empty_list.index(delete_person)]
+
+        with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application/information.txt","r",encoding = "utf-8") as new_file:
+            for i in new_list:
+                new_file.write(i)
+            print("Data is being deleted...")
+            time.sleep(3)
+            print("Data deleted succesfully")
+            self.back_menu()
+        
 
     def data_read(self):
-        pass
-
+        with open("C:/Users/ekvk4/Downloads/Python_Applications/Python_Applications/Data_entry_application/information.txt","r",encoding = "utf-8") as file:
+            for i in file:
+                print(i)
+            self.back_menu()
+        
+        
     def exit(self):
-        pass
-
-    def back_menu(self):
-        pass 
-
-
+        print("exiting...")
+        time.sleep(3)
+        self.loop = False
+        exit()
 
 
 system = data_input("Data Entering System")
